@@ -21,12 +21,13 @@
         color: white;
       }
 
-      #myChart {
+      #chartCont {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 99;
+        z-index: -1;
+        margin-bottom: 10px;
       }
 
       .title {
@@ -37,6 +38,10 @@
 
       #result {
         column-count: 3;
+        text-align: left;
+        background-color: rgba(26, 26, 26, 0.8);
+        border-radius: 5px;
+        padding: 5px;
       }
 
       #input {
@@ -44,6 +49,37 @@
         background-color: black;
         border: 1px solid white;
         margin-top: 10px;
+      }
+
+      .dateCont {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+      }
+
+      h3 {
+        background-color: rgba(0, 0, 0, 0.9);
+        color: rgb(121, 121, 121);
+        padding-right: 7px;
+        padding-left: 7px;
+      }
+
+      .resultCont {
+        padding-right: 20%;
+        padding-left: 20%;
+        margin-top: 10px;
+      }
+
+      .form {
+        line-height: 0.8em;
+        vertical-align: center;
       }
     </style>
 
@@ -56,11 +92,21 @@
         <input id="input" style="color: white; font-size: 35px" />
         <button class="mui-btn mui-btn--raised" onclick="getData()">Go</button>
       </div>
-      <div id="result"></div>
+      <div class="resultCont" style="text-align: center">
+        <div id="result"></div>
+      </div>
     </div>
     <div id="chartCont"></div>
+    <div class="dateCont">
+      <h3>1700</h3>
+      <h3>2023</h3>
+    </div>
     <script src="./ztext.min.js"></script>
     <script src="./script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+    <script src="./chartjs-plugin-zoom.min.js"></script>
+
+    <script src="./ztext.min.js"></script>
   </body>
 </html>

@@ -1,6 +1,16 @@
-function test() {
-  alert("test");
-}
+const colors = [
+  "rgb(75, 192, 192)",
+  "#8C2981",
+  "#A8327C",
+  "#DD4968",
+  "#F15F5C",
+  "#FA7F5D",
+  "#FE9E6D",
+  "#FDBF84",
+  "#FDDEA0",
+  "#FCFDBF",
+  "#FFFFFF",
+];
 
 async function getData() {
   const gram = document.getElementById("input").value;
@@ -30,8 +40,16 @@ function renderData(data) {
   let htmlOut = "";
   if (data.length > 1) {
     for (let i = 1; i < data.length; i++) {
+      let _name;
+      if (data[i].ngram.includes("_")) {
+        _name = data[i].ngram.substr(0, data[i].ngram.indexOf("_"));
+      } else {
+        _name = data[i].ngram;
+      }
       const element = data[i];
-      htmlOut = htmlOut + `<h4>${element.ngram}</h4>`;
+      htmlOut =
+        htmlOut +
+        `<h4> <span style="width: 15px; height: 15px; margin:auto; display: inline-block; border: 1px solid gray; vertical-align: middle; border-radius: 2px; background: ${colors[i]} "> </span> ${_name}</h4>`;
     }
   } else {
     htmlOut = data[0].ngram;
@@ -46,23 +64,10 @@ function renderData(data) {
 }
 
 function renderMultiChart(input) {
-  let colors = [
-    "rgb(75, 192, 192)",
-    "#8C2981",
-    "#A8327C",
-    "#DD4968",
-    "#F15F5C",
-    "#FA7F5D",
-    "#FE9E6D",
-    "#FDBF84",
-    "#FDDEA0",
-    "#FCFDBF",
-  ];
-
   let _datasets = [];
   input.map((x, index) => {
     _datasets.push({
-      label: x.ngram,
+      label: x.ngram.substr(0, x.ngram.lastIndexOf("_")),
       data: x.timeseries,
       fill: false,
       borderColor: colors[index],
@@ -151,6 +156,17 @@ function renderChart(input) {
       plugins: {
         legend: {
           display: false,
+        },
+        zoom: {
+          zoom: {
+            wheel: {
+              enabled: true,
+            },
+            pinch: {
+              enabled: true,
+            },
+            mode: "xy",
+          },
         },
       },
     },
